@@ -1,9 +1,9 @@
 import sys
-from PyQt6.QtWidgets import QApplication, QLabel, QWidget
+from PyQt6.QtWidgets import QApplication, QLabel, QWidget, QPushButton
 
 app = QApplication(sys.argv)
 
-window = QWidget()
+window = QPushButton()
 window.setWindowTitle("Moja aplikacja PyQt")
 window.setGeometry(100, 100, 400, 300)
 
@@ -12,3 +12,4 @@ label.move(150, 130)
 
 window.show()
 sys.exit(app.exec())
+\
