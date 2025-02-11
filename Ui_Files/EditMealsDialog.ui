@@ -37,7 +37,7 @@
          <item>
           <widget class="QPushButton" name="editButton">
            <property name="text">
-            <string>Edit</string>
+            <string>&amp;Edit</string>
            </property>
            <property name="autoDefault">
             <bool>false</bool>
@@ -47,7 +47,7 @@
          <item>
           <widget class="QPushButton" name="addButton">
            <property name="text">
-            <string>Add</string>
+            <string>&amp;Add</string>
            </property>
            <property name="autoDefault">
             <bool>false</bool>
@@ -57,7 +57,7 @@
          <item>
           <widget class="QPushButton" name="deleteButton">
            <property name="text">
-            <string>Delete</string>
+            <string>&amp;Delete</string>
            </property>
            <property name="autoDefault">
             <bool>false</bool>
@@ -80,7 +80,7 @@
          <item>
           <widget class="QPushButton" name="closeButton">
            <property name="text">
-            <string>Close</string>
+            <string>&amp;Close</string>
            </property>
            <property name="autoDefault">
             <bool>false</bool>

@@ -62,7 +62,7 @@ class Ui_Dialog(object):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
         self.label.setText(_translate("Dialog", "Meals:"))
-        self.editButton.setText(_translate("Dialog", "Edit"))
-        self.addButton.setText(_translate("Dialog", "Add"))
-        self.deleteButton.setText(_translate("Dialog", "Delete"))
-        self.closeButton.setText(_translate("Dialog", "Close"))
+        self.editButton.setText(_translate("Dialog", "&Edit"))
+        self.addButton.setText(_translate("Dialog", "&Add"))
+        self.deleteButton.setText(_translate("Dialog", "&Delete"))
+        self.closeButton.setText(_translate("Dialog", "&Close"))

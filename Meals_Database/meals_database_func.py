@@ -1,8 +1,13 @@
 import sqlite3
 import os
+import sys
 
 # Database path
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # Dir with file
+# Prawidłowa ścieżka do bazy danych w przypadku uruchomienia z pliku .exe
+if getattr(sys, 'frozen', False):  # Gdy uruchamiane z pliku exe
+    BASE_DIR = os.path.dirname(sys.executable)  # Katalog, w którym znajduje się plik exe
+else:
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # Katalog w przypadku uruchamiania z pliku .py
 DB_PATH = os.path.join(BASE_DIR, "meals.db")  # Full database path
 
 

@@ -2,3 +2,7 @@ venv/
 idea.txt
 __pycache__
 updateUi.sh
+build/
+dist/
+MealGambler.spec
+createExe.sh

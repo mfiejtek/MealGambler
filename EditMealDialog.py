@@ -30,7 +30,6 @@ class EditMealDialog(QDialog, Ui_Dialog):
 
         # Aktualizacja posiłku w bazie
         updateMeal(self.mealId, newName, newCategory, newIngredients)
-        QMessageBox.information(self, "Success", "Meal updated successfully.")
         self.accept()
 
 
