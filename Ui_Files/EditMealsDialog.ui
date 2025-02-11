@@ -39,6 +39,9 @@
            <property name="text">
             <string>Edit</string>
            </property>
+           <property name="autoDefault">
+            <bool>false</bool>
+           </property>
           </widget>
          </item>
          <item>
@@ -46,12 +49,18 @@
            <property name="text">
             <string>Add</string>
            </property>
+           <property name="autoDefault">
+            <bool>false</bool>
+           </property>
           </widget>
          </item>
          <item>
           <widget class="QPushButton" name="deleteButton">
            <property name="text">
             <string>Delete</string>
+           </property>
+           <property name="autoDefault">
+            <bool>false</bool>
            </property>
           </widget>
          </item>
@@ -73,6 +82,9 @@
            <property name="text">
             <string>Close</string>
            </property>
+           <property name="autoDefault">
+            <bool>false</bool>
+           </property>
           </widget>
          </item>
         </layout>
@@ -83,6 +95,13 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>editButton</tabstop>
+  <tabstop>addButton</tabstop>
+  <tabstop>deleteButton</tabstop>
+  <tabstop>closeButton</tabstop>
+  <tabstop>listView</tabstop>
+ </tabstops>
  <resources/>
  <connections>
   <connection>

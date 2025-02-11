@@ -1,5 +1,6 @@
 import sys
 from PyQt6.QtWidgets import QApplication, QMainWindow
+from PyQt6.QtCore import QSize
 from Ui_Files.Ui_MainWindow import Ui_MainWindow
 from Meals_Database.meals_database_func import initializeDatabase
 from EditMealsDialog import EditMealsDialog
@@ -10,6 +11,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.setupUi(self)
 
         self.setWindowTitle("MealGambler")
+        self.setFixedSize(QSize(300, 150))
+
         self.editMealsButton.clicked.connect(self.openEditMealsDialog)
     
     def openEditMealsDialog(self):

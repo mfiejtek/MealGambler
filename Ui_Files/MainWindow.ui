@@ -25,7 +25,14 @@
     <item row="1" column="0">
      <widget class="QPushButton" name="generateButton">
       <property name="text">
-       <string>Generate </string>
+       <string>Generate meal plan</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="0">
+     <widget class="QPushButton" name="pushButton">
+      <property name="text">
+       <string>Exit</string>
       </property>
      </widget>
     </item>
@@ -37,6 +44,27 @@
    </property>
   </action>
  </widget>
+ <tabstops>
+  <tabstop>generateButton</tabstop>
+  <tabstop>editMealsButton</tabstop>
+ </tabstops>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>194</x>
+     <y>120</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>174</x>
+     <y>138</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

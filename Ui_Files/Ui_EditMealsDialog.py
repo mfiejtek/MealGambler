@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'EditMealsDialog.ui'
+# Form implementation generated from reading ui file '/home/fiejtek_1162023/MealGambler/Ui_Files/EditMealsDialog.ui'
 #
 # Created by: PyQt6 UI code generator 6.8.0
 #
@@ -29,17 +29,21 @@ class Ui_Dialog(object):
         self.verticalLayout = QtWidgets.QVBoxLayout()
         self.verticalLayout.setObjectName("verticalLayout")
         self.editButton = QtWidgets.QPushButton(parent=Dialog)
+        self.editButton.setAutoDefault(False)
         self.editButton.setObjectName("editButton")
         self.verticalLayout.addWidget(self.editButton)
         self.addButton = QtWidgets.QPushButton(parent=Dialog)
+        self.addButton.setAutoDefault(False)
         self.addButton.setObjectName("addButton")
         self.verticalLayout.addWidget(self.addButton)
         self.deleteButton = QtWidgets.QPushButton(parent=Dialog)
+        self.deleteButton.setAutoDefault(False)
         self.deleteButton.setObjectName("deleteButton")
         self.verticalLayout.addWidget(self.deleteButton)
         spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
         self.verticalLayout.addItem(spacerItem)
         self.closeButton = QtWidgets.QPushButton(parent=Dialog)
+        self.closeButton.setAutoDefault(False)
         self.closeButton.setObjectName("closeButton")
         self.verticalLayout.addWidget(self.closeButton)
         self.horizontalLayout.addLayout(self.verticalLayout)
@@ -49,6 +53,10 @@ class Ui_Dialog(object):
         self.retranslateUi(Dialog)
         self.closeButton.clicked.connect(Dialog.reject) # type: ignore
         QtCore.QMetaObject.connectSlotsByName(Dialog)
+        Dialog.setTabOrder(self.editButton, self.addButton)
+        Dialog.setTabOrder(self.addButton, self.deleteButton)
+        Dialog.setTabOrder(self.deleteButton, self.closeButton)
+        Dialog.setTabOrder(self.closeButton, self.listView)
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate

@@ -35,11 +35,11 @@ def addMeal(name, category, ingredients):
     conn.close()
 
 #Delete meal from database
-def deleteMeal(mealName):
+def deleteMeal(mealId):
     conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
     
-    cursor.execute("DELETE FROM meals WHERE name = ?", (mealName,))
+    cursor.execute("DELETE FROM meals WHERE id = ?", (mealId,))
     
     conn.commit()
     conn.close()

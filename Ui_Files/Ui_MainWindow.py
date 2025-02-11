@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'MainWindow.ui'
+# Form implementation generated from reading ui file '/home/fiejtek_1162023/MealGambler/Ui_Files/MainWindow.ui'
 #
 # Created by: PyQt6 UI code generator 6.8.0
 #
@@ -23,16 +23,22 @@ class Ui_MainWindow(object):
         self.generateButton = QtWidgets.QPushButton(parent=self.centralwidget)
         self.generateButton.setObjectName("generateButton")
         self.gridLayout.addWidget(self.generateButton, 1, 0, 1, 1)
+        self.pushButton = QtWidgets.QPushButton(parent=self.centralwidget)
+        self.pushButton.setObjectName("pushButton")
+        self.gridLayout.addWidget(self.pushButton, 3, 0, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
         self.actionDelete = QtGui.QAction(parent=MainWindow)
         self.actionDelete.setObjectName("actionDelete")
 
         self.retranslateUi(MainWindow)
+        self.pushButton.clicked.connect(MainWindow.close) # type: ignore
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
+        MainWindow.setTabOrder(self.generateButton, self.editMealsButton)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.editMealsButton.setText(_translate("MainWindow", "Edit meals"))
-        self.generateButton.setText(_translate("MainWindow", "Generate "))
+        self.generateButton.setText(_translate("MainWindow", "Generate meal plan"))
+        self.pushButton.setText(_translate("MainWindow", "Exit"))
         self.actionDelete.setText(_translate("MainWindow", "Delete"))
