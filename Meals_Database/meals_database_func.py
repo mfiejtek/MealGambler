@@ -44,6 +44,15 @@ def deleteMeal(mealId):
     conn.commit()
     conn.close()
 
+def updateMeal(mealId, newName, newCategory, newIngredients):
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+
+    cursor.execute("UPDATE meals SET name = ?, category = ?, ingredients = ? WHERE id = ?", (newName, newCategory, newIngredients, mealId))
+
+    conn.commit()
+    conn.close()
+
 #Get all meals from database
 def getAllMeals():
     conn = sqlite3.connect(DB_PATH)

@@ -16,7 +16,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.editMealsButton.clicked.connect(self.openEditMealsDialog)
     
     def openEditMealsDialog(self):
-        self.EditMealsDialog = EditMealsDialog()
+        self.EditMealsDialog = EditMealsDialog(self)
         self.EditMealsDialog.exec()
 
 
