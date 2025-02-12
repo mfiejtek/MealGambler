@@ -19,6 +19,7 @@ class EditMealsDialog(QDialog, Ui_Dialog):
         self.listView.setModel(self.mealsModel)
         self.loadMeals()
         self.listView.setCurrentIndex(QModelIndex())
+        self.listView.doubleClicked.connect(self.editMeal)
         #Buttons
         self.deleteButton.clicked.connect(self.deleteSelectedMeals)
         self.addButton.clicked.connect(self.addNewMeal)
@@ -26,7 +27,6 @@ class EditMealsDialog(QDialog, Ui_Dialog):
 
 
     def loadMeals(self):
-        """Wczytuje posiłki z bazy i aktualizuje ListView"""
         self.mealsModel.clear()
         meals = getAllMeals()
 
