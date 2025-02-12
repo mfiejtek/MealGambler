@@ -62,7 +62,7 @@ class EditMealsDialog(QDialog, Ui_Dialog):
         dialog = AddMealDialog(self)
         if dialog.exec():
             self.loadMeals()
-        QMessageBox.information(self, "Success", "Meal added successfully.")
+        
         
     
     def editMeal(self):
@@ -84,7 +84,7 @@ class EditMealsDialog(QDialog, Ui_Dialog):
         dialog = EditMealDialog(mealId, mealName, mealCategory, mealIngredients, self)
         if dialog.exec():
             self.loadMeals()
-        QMessageBox.information(self, "Success", "Meal updated successfully.")
+        
 
     
 

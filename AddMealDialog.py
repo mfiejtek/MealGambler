@@ -26,3 +26,4 @@ class AddMealDialog(QDialog, Ui_Dialog):
         
         addMeal(mealName, mealCategory, mealIngredients)
         self.accept()
+        QMessageBox.information(self, "Success", "Meal added successfully.")
