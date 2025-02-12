@@ -1,8 +1,8 @@
-venv/
 idea.txt
+venv/
 __pycache__
 updateUi.sh
 build/
-dist/
+dist/   
 MealGambler.spec
 createExe.sh
