@@ -18,12 +18,14 @@ class AddMealDialog(QDialog, Ui_Dialog):
     def saveMeal(self):
         mealName = self.nameLineEdit.text().strip()
         mealCategory = self.categoryComboBox.currentText()
+        mealCalories = self.caloriesSpinBox.value()
         mealIngredients = self.ingredientsPlainTextEdit.toPlainText()
+        
 
         if not mealName or not mealCategory or not mealIngredients:
             QMessageBox.warning(self, "Error", "Please input following data:\n- name\n- category\n- ingredients")
             return
         
-        addMeal(mealName, mealCategory, mealIngredients)
+        addMeal(mealName, mealCategory, mealCalories, mealIngredients)
         self.accept()
         QMessageBox.information(self, "Success", "Meal added successfully.")

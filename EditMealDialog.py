@@ -5,7 +5,7 @@ from Meals_Database.meals_database_func import updateMeal
 
 
 class EditMealDialog(QDialog, Ui_Dialog):
-    def __init__(self, mealId, mealName, mealCategory, mealIngredients, parent = None,):
+    def __init__(self, mealId, mealName, mealCategory, mealCalories, mealIngredients, parent = None,):
         super().__init__(parent)
         self.setupUi(self)
 
@@ -14,7 +14,7 @@ class EditMealDialog(QDialog, Ui_Dialog):
         self.mealId = mealId
         self.nameLineEdit.setText(mealName)
         self.categoryComboBox.setCurrentText(mealCategory)
-
+        self.caloriesSpinBox.setValue(mealCalories)
         self.ingredientsPlainTextEdit.setPlainText(mealIngredients)
 
         self.buttonBox.accepted.connect(self.saveChanges)
@@ -22,6 +22,7 @@ class EditMealDialog(QDialog, Ui_Dialog):
     def saveChanges(self):
         newName = self.nameLineEdit.text().strip()
         newCategory = self.categoryComboBox.currentText()
+        newCalories = self.caloriesSpinBox.value()
         newIngredients = self.ingredientsPlainTextEdit.toPlainText()
 
         if not newName:
@@ -29,7 +30,7 @@ class EditMealDialog(QDialog, Ui_Dialog):
             return
 
         # Aktualizacja posiłku w bazie
-        updateMeal(self.mealId, newName, newCategory, newIngredients)
+        updateMeal(self.mealId, newName, newCategory, newCalories, newIngredients)
         self.accept()
         QMessageBox.information(self, "Success", "Meal updated successfully.")
 

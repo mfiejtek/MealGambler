@@ -34,7 +34,8 @@ class EditMealsDialog(QDialog, Ui_Dialog):
             mealItem = QStandardItem(meal[1])                           # Name
             mealItem.setData(meal[0], Qt.ItemDataRole.UserRole)         # Id
             mealItem.setData(meal[2], Qt.ItemDataRole.UserRole + 1)     # Category
-            mealItem.setData(meal[3], Qt.ItemDataRole.UserRole + 2)     # Ingredients
+            mealItem.setData(meal[3], Qt.ItemDataRole.UserRole + 2)     # Calories
+            mealItem.setData(meal[4], Qt.ItemDataRole.UserRole + 3)     # Ingredients
             self.mealsModel.appendRow(mealItem)
         
 
@@ -79,9 +80,10 @@ class EditMealsDialog(QDialog, Ui_Dialog):
         mealId = index.data(Qt.ItemDataRole.UserRole)
         mealName = index.data(Qt.ItemDataRole.DisplayRole)  
         mealCategory = index.data(Qt.ItemDataRole.UserRole + 1)
-        mealIngredients = index.data(Qt.ItemDataRole.UserRole + 2)
+        mealCalories = index.data(Qt.ItemDataRole.UserRole + 2)
+        mealIngredients = index.data(Qt.ItemDataRole.UserRole + 3)
 
-        dialog = EditMealDialog(mealId, mealName, mealCategory, mealIngredients, self)
+        dialog = EditMealDialog(mealId, mealName, mealCategory, mealCalories, mealIngredients, self)
         if dialog.exec():
             self.loadMeals()
         

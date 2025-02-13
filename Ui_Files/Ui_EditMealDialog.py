@@ -40,6 +40,7 @@ class Ui_Dialog(object):
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.caloriesSpinBox = QtWidgets.QSpinBox(parent=Dialog)
+        self.caloriesSpinBox.setMaximum(10000)
         self.caloriesSpinBox.setObjectName("caloriesSpinBox")
         self.horizontalLayout.addWidget(self.caloriesSpinBox)
         self.kcalLabel = QtWidgets.QLabel(parent=Dialog)

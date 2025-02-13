@@ -21,6 +21,7 @@ def initializeDatabase():
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL,
         category TEXT,
+        calories INTEGER,
         ingredients TEXT
     )
     """)
@@ -29,12 +30,12 @@ def initializeDatabase():
     conn.close()
 
 #Add meal to database
-def addMeal(name, category, ingredients):
+def addMeal(name, category, calories, ingredients):
     conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
     
-    cursor.execute("INSERT INTO meals (name, category, ingredients) VALUES (?, ?, ?)", 
-                   (name, category, ingredients))
+    cursor.execute("INSERT INTO meals (name, category, calories, ingredients) VALUES (?, ?, ?, ?)", 
+                   (name, category, calories, ingredients))
     
     conn.commit()
     conn.close()
@@ -49,11 +50,17 @@ def deleteMeal(mealId):
     conn.commit()
     conn.close()
 
-def updateMeal(mealId, newName, newCategory, newIngredients):
+def updateMeal(mealId, newName, newCategory, newCalories, newIngredients):
     conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
 
-    cursor.execute("UPDATE meals SET name = ?, category = ?, ingredients = ? WHERE id = ?", (newName, newCategory, newIngredients, mealId))
+    cursor.execute("""UPDATE meals SET
+                    name = ?,
+                    category = ?,
+                    calories = ?,
+                    ingredients = ?
+                    WHERE id = ?""", 
+                (newName, newCategory, newCalories, newIngredients, mealId))
 
     conn.commit()
     conn.close()

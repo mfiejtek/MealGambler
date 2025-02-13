@@ -1,11 +1,11 @@
 import sys
 from PyQt6.QtWidgets import QApplication, QMainWindow
-from PyQt6.QtGui import QIcon
 from PyQt6.QtCore import QSize
 from Ui_Files.Ui_MainWindow import Ui_MainWindow
 from Meals_Database.meals_database_func import initializeDatabase
 from EditMealsDialog import EditMealsDialog
-import os
+from GenerateMealsDialog import GenerateMealsDialog
+
 
 class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self):
@@ -18,6 +18,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.centerWindow()
 
         self.editMealsButton.clicked.connect(self.openEditMealsDialog)
+        self.generateButton.clicked.connect(self.openGenerateMealsDialog)
+    
+    def openGenerateMealsDialog(self):
+        self.GenerateMealsDialog = GenerateMealsDialog()
+        self.GenerateMealsDialog.exec()
     
     def openEditMealsDialog(self):
         self.EditMealsDialog = EditMealsDialog()
