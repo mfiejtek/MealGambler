@@ -2,13 +2,15 @@ from PyQt6.QtWidgets import  QWidget, QVBoxLayout, QPushButton, QHBoxLayout, QFr
 from PyQt6.QtGui import QFont
 from ChooseMealDialog import ChooseMealDialog
 from Meals_Database.meals_database_func import getMealsFromCategory
+import random
 
 DEFAULT_DAILY_MEALS = ("Breakfast", "Dinner", "Supper", "Snack")
 DEFAULT_DAYS_NUMBER = 7
 
 class DailyMeals(QWidget):
-    def __init__(self, userDailyMeals = DEFAULT_DAILY_MEALS, parent = None):
+    def __init__(self, userDailyMeals, parent = None):
         super().__init__(parent)
+        self.userDailyMeals = userDailyMeals
 
         self.frame = QFrame(self)
         self.frame.setFrameShape(QFrame.Shape.Box)
@@ -19,7 +21,7 @@ class DailyMeals(QWidget):
         self.dailyMealsLayout.setSpacing(0)
         self.dailyMealsButtons = []
 
-        self.buttonsIni(userDailyMeals)
+        self.buttonsIni()
 
 
         self.frame.setLayout(self.dailyMealsLayout)
@@ -31,11 +33,11 @@ class DailyMeals(QWidget):
 
         self.setLayout(self.mainLayout)
 
-    def buttonsIni(self, userDailyMeals):
+    def buttonsIni(self):
         buttonsFont = QFont()
         buttonsFont.setItalic(True)
         
-        for meal in userDailyMeals:
+        for meal in self.userDailyMeals:
             mealButton = QPushButton(meal)
             mealButton.setFont(buttonsFont)
             mealButton.setAutoDefault(False)
@@ -57,13 +59,14 @@ class DailyMeals(QWidget):
 
      
 class MealsView(QWidget):
-    def __init__(self, userDaysNumber = DEFAULT_DAYS_NUMBER, parent = None):
+    def __init__(self, userDaysNumber = DEFAULT_DAYS_NUMBER, userDailyMeals = DEFAULT_DAILY_MEALS, parent = None):
         super().__init__()
 
         self.mealsViewLayout = QHBoxLayout()
-        self.userDailyMeals = DEFAULT_DAILY_MEALS
+        self.userDaysNumber = userDaysNumber
+        self.userDailyMeals = userDailyMeals
         
-        for _ in range(userDaysNumber):
+        for _ in range(self.userDaysNumber):
             self.mealsViewLayout.addWidget(DailyMeals(self.userDailyMeals))
         
         self.setLayout(self.mealsViewLayout)
@@ -78,5 +81,15 @@ class MealsView(QWidget):
                 buttonCounter+=1
 
     def randomizeMeals(self):
-        return
+        for i in range(self.mealsViewLayout.count()):
+            layoutItem = self.mealsViewLayout.itemAt(i)
+            widget = layoutItem.widget()
+
+            for buttonIndex, button in enumerate(widget.dailyMealsButtons):
+                mealCategory = self.userDailyMeals[buttonIndex]
+                meals = getMealsFromCategory(mealCategory)
+                
+                if meals:
+                    randomMeal = random.choice(meals)
+                    button.setText(randomMeal[1])
 

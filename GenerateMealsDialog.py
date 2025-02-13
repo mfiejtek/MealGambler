@@ -9,6 +9,7 @@ class GenerateMealsDialog(QDialog, Ui_Dialog):
         self.setWindowTitle("Generate meals")
 
         self.clearButton.clicked.connect(self.onClearButtonClick)
+        self.randGenerateButton.clicked.connect(self.onRandomButtonClick)
     
     def onClearButtonClick(self):
         self.mealsViewWidget.clearMeals()
