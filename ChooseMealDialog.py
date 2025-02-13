@@ -20,7 +20,7 @@ class ChooseMealDialog(QDialog, Ui_Dialog):
         self.loadMeals()
         self.listView.setCurrentIndex(QModelIndex())
 
-        self.buttonBox.accepted.connect(self.getMeal)
+        self.buttonBox.accepted.connect(self.accept)
 
     def loadMeals(self):
         self.mealsModel.clear()
@@ -42,6 +42,6 @@ class ChooseMealDialog(QDialog, Ui_Dialog):
             return 
         index = selectedIndex[0]
         mealName = index.data(Qt.ItemDataRole.DisplayRole)
-        self.accept()
+        self.done(QDialog.DialogCode.Accepted)
         return mealName
         
