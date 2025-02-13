@@ -1,4 +1,4 @@
-from PyQt6.QtWidgets import  QWidget, QVBoxLayout, QPushButton, QHBoxLayout
+from PyQt6.QtWidgets import  QWidget, QVBoxLayout, QPushButton, QHBoxLayout, QFrame, QGridLayout
 from PyQt6.QtGui import QFont
 
 DEFAULT_DAILY_MEALS = ("Breakfast", "Dinner", "Supper")
@@ -7,6 +7,10 @@ DEFAULT_DAYS_NUMBER = 7
 class DailyMeals(QWidget):
     def __init__(self, userDailyMeals = DEFAULT_DAILY_MEALS, parent = None):
         super().__init__(parent)
+
+        self.frame = QFrame(self)
+        self.frame.setFrameShape(QFrame.Shape.Box)
+        self.frame.setLineWidth(2)                                           
 
         self.dailyMealsLayout = QVBoxLayout()
         self.dailyMealsButtons = []
@@ -20,7 +24,12 @@ class DailyMeals(QWidget):
             mealButton.clicked.connect(lambda checked, currentMeal = meal: self.onMealButtonClicked(currentMeal))
             self.dailyMealsLayout.addWidget(mealButton)
 
-        self.setLayout(self.dailyMealsLayout)
+        self.frame.setLayout(self.dailyMealsLayout)
+
+        self.mainLayout = QGridLayout()
+        self.mainLayout.addWidget(self.frame)
+
+        self.setLayout(self.mainLayout)
 
     def onMealButtonClicked(slef, meal):
         print(f"Clicked {meal}")
