@@ -1,8 +1,9 @@
-from PyQt6.QtWidgets import  QWidget, QVBoxLayout, QPushButton, QHBoxLayout, QFrame, QGridLayout
+from PyQt6.QtWidgets import  QWidget, QVBoxLayout, QPushButton, QHBoxLayout, QFrame, QGridLayout, QDialog, QSizePolicy
 from PyQt6.QtGui import QFont
 from ChooseMealDialog import ChooseMealDialog
+from Meals_Database.meals_database_func import getMealsFromCategory
 
-DEFAULT_DAILY_MEALS = ("Breakfast", "Dinner", "Supper")
+DEFAULT_DAILY_MEALS = ("Breakfast", "Dinner", "Supper", "Snack")
 DEFAULT_DAYS_NUMBER = 7
 
 class DailyMeals(QWidget):
@@ -13,40 +14,69 @@ class DailyMeals(QWidget):
         self.frame.setFrameShape(QFrame.Shape.Box)
         self.frame.setLineWidth(1)
                                
-
         self.dailyMealsLayout = QVBoxLayout()
+        self.dailyMealsLayout.setContentsMargins(0, 0, 0, 0)
+        self.dailyMealsLayout.setSpacing(0)
         self.dailyMealsButtons = []
-        
 
+        self.buttonsIni(userDailyMeals)
+
+
+        self.frame.setLayout(self.dailyMealsLayout)
+
+        self.mainLayout = QGridLayout()
+        self.mainLayout.addWidget(self.frame)
+        self.mainLayout.setContentsMargins(0, 0, 0, 0)
+        self.mainLayout.setSpacing(0)
+
+        self.setLayout(self.mainLayout)
+
+    def buttonsIni(self, userDailyMeals):
         buttonsFont = QFont()
         buttonsFont.setItalic(True)
         
         for meal in userDailyMeals:
             mealButton = QPushButton(meal)
             mealButton.setFont(buttonsFont)
-            mealButton.clicked.connect(lambda checked, currentMeal = meal: self.onMealButtonClicked(currentMeal))
+            mealButton.setAutoDefault(False)
+
+            sizePolicy = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
+            mealButton.setSizePolicy(sizePolicy)
+
+            self.dailyMealsButtons.append(mealButton)
+            mealButton.clicked.connect(lambda checked, currentMeal = meal, button = mealButton: self.onMealButtonClicked(currentMeal, button))
             self.dailyMealsLayout.addWidget(mealButton)
+        
 
-        self.frame.setLayout(self.dailyMealsLayout)
+    def onMealButtonClicked(self, meal, button):
+        chooseMealDialog = ChooseMealDialog(meal, self)
+        if chooseMealDialog.exec() == QDialog.DialogCode.Accepted:
+            newButtonLabel = chooseMealDialog.getMeal()
+            if newButtonLabel:
+                button.setText(newButtonLabel)
 
-        self.mainLayout = QGridLayout()
-        self.mainLayout.addWidget(self.frame)
-
-        self.setLayout(self.mainLayout)
-
-    def onMealButtonClicked(self, meal):
-        self.chooseMealDialog = ChooseMealDialog(meal, self)
-        self.chooseMealDialog.show()
-
+     
 class MealsView(QWidget):
     def __init__(self, userDaysNumber = DEFAULT_DAYS_NUMBER, parent = None):
         super().__init__()
 
         self.mealsViewLayout = QHBoxLayout()
+        self.userDailyMeals = DEFAULT_DAILY_MEALS
         
-
         for _ in range(userDaysNumber):
-            self.mealsViewLayout.addWidget(DailyMeals())
+            self.mealsViewLayout.addWidget(DailyMeals(self.userDailyMeals))
         
         self.setLayout(self.mealsViewLayout)
+
+    def clearMeals(self):
+        for i in range(self.mealsViewLayout.count()):
+            layoutItem = self.mealsViewLayout.itemAt(i)
+            widget = layoutItem.widget()
+            buttonCounter = 0
+            for button in widget.dailyMealsButtons:
+                button.setText(self.userDailyMeals[buttonCounter])
+                buttonCounter+=1
+
+    def randomizeMeals(self):
+        return
 

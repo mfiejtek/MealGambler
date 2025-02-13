@@ -54,7 +54,6 @@ class EditMealsDialog(QDialog, Ui_Dialog):
             QMessageBox.warning(self, "Error", "Please mark meals for deletion.")
 
 
-
     def addNewMeal(self):
         dialog = AddMealDialog(self)
         if dialog.exec():

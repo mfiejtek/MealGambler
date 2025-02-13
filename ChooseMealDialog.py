@@ -1,4 +1,4 @@
-from PyQt6.QtWidgets import QDialog, QListView
+from PyQt6.QtWidgets import QDialog, QListView, QMessageBox
 from PyQt6.QtGui import QStandardItem, QStandardItemModel
 from PyQt6.QtCore import Qt, QModelIndex
 
@@ -16,10 +16,12 @@ class ChooseMealDialog(QDialog, Ui_Dialog):
         self.listView.setSelectionMode(QListView.SelectionMode.SingleSelection)
         self.mealsModel = QStandardItemModel()
         self.listView.setModel(self.mealsModel)
+        self.listView.doubleClicked.connect(self.getMeal)
         self.loadMeals()
         self.listView.setCurrentIndex(QModelIndex())
 
-    
+        self.buttonBox.accepted.connect(self.getMeal)
+
     def loadMeals(self):
         self.mealsModel.clear()
         meals = getMealsFromCategory(self.category)
@@ -31,4 +33,15 @@ class ChooseMealDialog(QDialog, Ui_Dialog):
             mealItem.setData(meal[3], Qt.ItemDataRole.UserRole + 2)     # Calories
             mealItem.setData(meal[4], Qt.ItemDataRole.UserRole + 3)     # Ingredients
             self.mealsModel.appendRow(mealItem)
+    
+
+    def getMeal(self):
+        selectedIndex = self.listView.selectedIndexes()
+        if not selectedIndex: 
+            QMessageBox.warning(self, "Error", "Please select a meal.")
+            return 
+        index = selectedIndex[0]
+        mealName = index.data(Qt.ItemDataRole.DisplayRole)
+        self.accept()
+        return mealName
         
