@@ -14,19 +14,29 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         self.setWindowTitle("MealGambler")
         self.setFixedSize(QSize(300, 150))
-        self.setWindowIcon(QIcon("icon.png"))
+
+        self.centerWindow()
 
         self.editMealsButton.clicked.connect(self.openEditMealsDialog)
     
     def openEditMealsDialog(self):
-        self.EditMealsDialog = EditMealsDialog(self)
+        self.EditMealsDialog = EditMealsDialog()
         self.EditMealsDialog.exec()
+
+    def centerWindow(self):
+        screen = QApplication.primaryScreen()
+        screenGeometry = screen.availableGeometry()
+        windowGeometry = self.frameGeometry()
+
+        centerPoint = screenGeometry.center()
+        windowGeometry.moveCenter(centerPoint)
+        self.move(windowGeometry.topLeft())
+
 
 
 if __name__ == "__main__":
     initializeDatabase()
     app = QApplication(sys.argv)
-    app.setWindowIcon(QIcon("icon.png"))
 
     mainWindow = MainWindow()
     mainWindow.show()

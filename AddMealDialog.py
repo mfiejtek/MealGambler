@@ -21,7 +21,7 @@ class AddMealDialog(QDialog, Ui_Dialog):
         mealIngredients = self.ingredientsPlainTextEdit.toPlainText()
 
         if not mealName or not mealCategory or not mealIngredients:
-            QMessageBox.warning(self, "Error", "Please input missing data.")
+            QMessageBox.warning(self, "Error", "Please input following data:\n- name\n- category\n- ingredients")
             return
         
         addMeal(mealName, mealCategory, mealIngredients)
