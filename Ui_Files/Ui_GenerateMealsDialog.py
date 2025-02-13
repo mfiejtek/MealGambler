@@ -29,6 +29,10 @@ class Ui_Dialog(object):
         self.clearButton.setAutoDefault(False)
         self.clearButton.setObjectName("clearButton")
         self.horizontalLayout.addWidget(self.clearButton)
+        self.settingsButton = QtWidgets.QPushButton(parent=Dialog)
+        self.settingsButton.setAutoDefault(False)
+        self.settingsButton.setObjectName("settingsButton")
+        self.horizontalLayout.addWidget(self.settingsButton)
         spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout.addItem(spacerItem1)
         self.verticalLayout.addLayout(self.horizontalLayout)
@@ -45,4 +49,5 @@ class Ui_Dialog(object):
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
         self.randGenerateButton.setText(_translate("Dialog", "Randomly generate"))
         self.clearButton.setText(_translate("Dialog", "Clear"))
+        self.settingsButton.setText(_translate("Dialog", "Settings"))
 from MealsView import MealsView
