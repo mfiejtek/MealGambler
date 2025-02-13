@@ -39,7 +39,6 @@ class EditMealsDialog(QDialog, Ui_Dialog):
             self.mealsModel.appendRow(mealItem)
         
 
-    
     def deleteSelectedMeals(self):
         selectedIndexes = self.listView.selectedIndexes()
 
@@ -48,10 +47,7 @@ class EditMealsDialog(QDialog, Ui_Dialog):
 
             for meal_id in meal_ids:
                 deleteMeal(meal_id)
-
-            model = self.listView.model()
-            for index in sorted(selectedIndexes, key=lambda x: x.row(), reverse=True):
-                model.removeRow(index.row())
+            self.loadMeals()
 
             QMessageBox.information(self, "Deleted", "Marked meals have been removed")
         else:

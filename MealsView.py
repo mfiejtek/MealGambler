@@ -1,5 +1,6 @@
 from PyQt6.QtWidgets import  QWidget, QVBoxLayout, QPushButton, QHBoxLayout, QFrame, QGridLayout
 from PyQt6.QtGui import QFont
+from ChooseMealDialog import ChooseMealDialog
 
 DEFAULT_DAILY_MEALS = ("Breakfast", "Dinner", "Supper")
 DEFAULT_DAYS_NUMBER = 7
@@ -10,10 +11,12 @@ class DailyMeals(QWidget):
 
         self.frame = QFrame(self)
         self.frame.setFrameShape(QFrame.Shape.Box)
-        self.frame.setLineWidth(2)                                           
+        self.frame.setLineWidth(1)
+                               
 
         self.dailyMealsLayout = QVBoxLayout()
         self.dailyMealsButtons = []
+        
 
         buttonsFont = QFont()
         buttonsFont.setItalic(True)
@@ -31,14 +34,16 @@ class DailyMeals(QWidget):
 
         self.setLayout(self.mainLayout)
 
-    def onMealButtonClicked(slef, meal):
-        print(f"Clicked {meal}")
+    def onMealButtonClicked(self, meal):
+        self.chooseMealDialog = ChooseMealDialog(meal, self)
+        self.chooseMealDialog.show()
 
 class MealsView(QWidget):
     def __init__(self, userDaysNumber = DEFAULT_DAYS_NUMBER, parent = None):
         super().__init__()
 
         self.mealsViewLayout = QHBoxLayout()
+        
 
         for _ in range(userDaysNumber):
             self.mealsViewLayout.addWidget(DailyMeals())
