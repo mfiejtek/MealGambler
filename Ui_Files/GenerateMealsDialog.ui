@@ -27,12 +27,20 @@
       </widget>
      </item>
      <item>
-      <widget class="QWidget" name="widget" native="true"/>
+      <widget class="MealsView" name="widget" native="true"/>
      </item>
     </layout>
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>MealsView</class>
+   <extends>QWidget</extends>
+   <header>MealsView</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

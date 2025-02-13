@@ -65,6 +65,16 @@ def updateMeal(mealId, newName, newCategory, newCalories, newIngredients):
     conn.commit()
     conn.close()
 
+def getMealsFromCategory(mealCategory):
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT * FROM meals WHERE category = ?", (mealCategory,))
+    meals = cursor.fetchall()
+
+    conn.close()
+    return meals
+
 #Get all meals from database
 def getAllMeals():
     conn = sqlite3.connect(DB_PATH)

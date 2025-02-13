@@ -21,7 +21,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.generateButton.clicked.connect(self.openGenerateMealsDialog)
     
     def openGenerateMealsDialog(self):
-        self.GenerateMealsDialog = GenerateMealsDialog()
+        self.GenerateMealsDialog = GenerateMealsDialog(self)
         self.GenerateMealsDialog.exec()
     
     def openEditMealsDialog(self):

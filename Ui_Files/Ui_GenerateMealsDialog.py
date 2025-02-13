@@ -21,7 +21,7 @@ class Ui_Dialog(object):
         self.label.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.label.setObjectName("label")
         self.verticalLayout.addWidget(self.label)
-        self.widget = QtWidgets.QWidget(parent=Dialog)
+        self.widget = MealsView(parent=Dialog)
         self.widget.setObjectName("widget")
         self.verticalLayout.addWidget(self.widget)
         self.gridLayout.addLayout(self.verticalLayout, 0, 0, 1, 1)
@@ -33,3 +33,4 @@ class Ui_Dialog(object):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
         self.label.setText(_translate("Dialog", "Test"))
+from MealsView import MealsView
