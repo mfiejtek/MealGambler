@@ -14,6 +14,7 @@ class AddMealDialog(QDialog, Ui_Dialog):
         self.nameLineEdit.setPlaceholderText("Enter meal name...")
         self.ingredientsPlainTextEdit.setPlaceholderText("Enter list of ingredients...")
         self.buttonBox.accepted.connect(self.saveMeal)
+        self.categoryComboBox.setStyleSheet("QComboBox { combobox-popup: 0; }")
 
     def saveMeal(self):
         mealName = self.nameLineEdit.text().strip()

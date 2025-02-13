@@ -5,7 +5,7 @@ from PyQt6.QtCore import Qt, QModelIndex
 from Ui_Files.Ui_EditMealsDialog import Ui_Dialog
 from AddMealDialog import AddMealDialog
 from EditMealDialog import EditMealDialog
-from Meals_Database.meals_database_func import getAllMeals, deleteMeal
+from Meals_Database.meals_database_func import getAllMeals, deleteMeal, getMealsFromCategory
 
 
 class EditMealsDialog(QDialog, Ui_Dialog):
@@ -24,11 +24,20 @@ class EditMealsDialog(QDialog, Ui_Dialog):
         self.deleteButton.clicked.connect(self.deleteSelectedMeals)
         self.addButton.clicked.connect(self.addNewMeal)
         self.editButton.clicked.connect(self.editMeal)
+        self.categoryComboBox.currentIndexChanged.connect(self.loadMeals)
+        self.categoryComboBox.setStyleSheet("QComboBox { combobox-popup: 0; }") #Repair combo box appearance
+
+        
 
 
     def loadMeals(self):
         self.mealsModel.clear()
-        meals = getAllMeals()
+        category = self.categoryComboBox.currentText()
+
+        if category == "All":
+            meals = getAllMeals()
+        else:
+            meals = getMealsFromCategory(category)
 
         for meal in meals:
             mealItem = QStandardItem(meal[1])                           # Name
