@@ -1,6 +1,6 @@
-from PyQt6.QtWidgets import  QWidget, QVBoxLayout, QPushButton, QHBoxLayout, QFrame, QGridLayout, QDialog, QSizePolicy
-from PyQt6.QtGui import QFont
+from PyQt6.QtWidgets import  QWidget, QVBoxLayout, QPushButton, QHBoxLayout, QFrame, QDialog, QSizePolicy, QLabel
 from ChooseMealDialog import ChooseMealDialog
+from PyQt6.QtCore import Qt
 from Meals_Database.meals_database_func import getMealsFromCategory
 from Meals_Database.user_settings_func import load_settings
 import random
@@ -12,7 +12,7 @@ class DailyMeals(QWidget):
     def __init__(self, userDailyMeals, userDay, parent = None):
         super().__init__(parent)
         self.userDailyMeals = userDailyMeals
-        self.userDays = userDay
+        self.userDay = userDay
 
         self.frame = QFrame(self)
         self.frame.setFrameShape(QFrame.Shape.Box)
@@ -25,10 +25,14 @@ class DailyMeals(QWidget):
 
         self.buttonsIni()
 
-
         self.frame.setLayout(self.dailyMealsLayout)
 
-        self.mainLayout = QHBoxLayout()
+        self.dayLabel = QLabel(self.userDay)
+        self.dayLabel.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        
+
+        self.mainLayout = QVBoxLayout()
+        self.mainLayout.addWidget(self.dayLabel)
         self.mainLayout.addWidget(self.frame)
         self.mainLayout.setContentsMargins(0, 0, 0, 0)
         self.mainLayout.setSpacing(0)
