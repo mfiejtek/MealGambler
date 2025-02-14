@@ -9,10 +9,10 @@ DEFAULT_DAILY_MEALS = ("Breakfast", "Dinner", "Supper", "Snack")
 DEFAULT_DAYS_NUMBER = 7
 
 class DailyMeals(QWidget):
-    def __init__(self, userDailyMeals, userDays, parent = None):
+    def __init__(self, userDailyMeals, userDay, parent = None):
         super().__init__(parent)
         self.userDailyMeals = userDailyMeals
-        self.userDays = userDays
+        self.userDays = userDay
 
         self.frame = QFrame(self)
         self.frame.setFrameShape(QFrame.Shape.Box)
@@ -28,7 +28,7 @@ class DailyMeals(QWidget):
 
         self.frame.setLayout(self.dailyMealsLayout)
 
-        self.mainLayout = QGridLayout()
+        self.mainLayout = QHBoxLayout()
         self.mainLayout.addWidget(self.frame)
         self.mainLayout.setContentsMargins(0, 0, 0, 0)
         self.mainLayout.setSpacing(0)
@@ -77,7 +77,7 @@ class MealsView(QWidget):
         self.userDailyMeals = settings.get("meals", [])
 
         for day in self.userDays:
-            self.mealsViewLayout.addWidget(DailyMeals(self.userDailyMeals, self.userDays))
+            self.mealsViewLayout.addWidget(DailyMeals(self.userDailyMeals, day))
 
     def clearMeals(self):
         for i in range(self.mealsViewLayout.count()):
