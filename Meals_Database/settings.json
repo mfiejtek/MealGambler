@@ -1,0 +1,4 @@
+{
+    "meals": ["Breakfast", "Dinner", "Supper", "Snack", "Other"],
+    "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+}

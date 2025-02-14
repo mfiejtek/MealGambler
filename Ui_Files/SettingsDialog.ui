@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>389</width>
-    <height>287</height>
+    <height>309</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -170,5 +170,22 @@
   </layout>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>Dialog</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>255</x>
+     <y>282</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>66</x>
+     <y>287</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>
