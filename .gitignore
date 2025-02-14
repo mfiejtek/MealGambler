@@ -7,4 +7,4 @@ dist/
 MealGambler.spec
 createExe.sh
 Meals_Database/meals.db
-
+Meals_Database/settings.json

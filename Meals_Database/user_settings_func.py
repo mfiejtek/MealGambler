@@ -10,6 +10,30 @@ else:
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # Katalog w przypadku uruchamiania z pliku .py
 SETTINGS_PATH = os.path.join(BASE_DIR, "settings.json")  # Full database path
 
+DEFAULT_SETTING = {    
+    "meals": [
+        "Breakfast",
+        "Dinner",
+        "Supper",
+        "Snack",
+        "Other"
+    ],
+    "days": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+    ]
+}
+
+def create_settings_file():
+    if not os.path.exists(SETTINGS_PATH):  # Sprawdza, czy plik istnieje
+        with open(SETTINGS_PATH, "w") as file:
+            json.dump(DEFAULT_SETTING, file, indent=4)  # Tworzy pusty plik JSON
+
 def load_settings():
     try:
         with open(SETTINGS_PATH, "r") as file:

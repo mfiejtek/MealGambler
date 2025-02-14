@@ -13,6 +13,7 @@ class GenerateMealsDialog(QDialog, Ui_Dialog):
         self.randGenerateButton.clicked.connect(self.onRandomButtonClick)
         self.settingsButton.clicked.connect(self.onSettingButtonClick)
 
+
     def onSettingButtonClick(self):
         self.settingsDialog = SettingsDialog(self)
         self.settingsDialog.exec()

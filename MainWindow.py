@@ -3,6 +3,7 @@ from PyQt6.QtWidgets import QApplication, QMainWindow
 from PyQt6.QtCore import QSize
 from Ui_Files.Ui_MainWindow import Ui_MainWindow
 from Meals_Database.meals_database_func import initializeDatabase
+from Meals_Database.user_settings_func import create_settings_file
 from EditMealsDialog import EditMealsDialog
 from GenerateMealsDialog import GenerateMealsDialog
 
@@ -41,6 +42,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
 if __name__ == "__main__":
     initializeDatabase()
+    create_settings_file()
     app = QApplication(sys.argv)
 
     mainWindow = MainWindow()
