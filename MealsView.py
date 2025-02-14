@@ -36,12 +36,8 @@ class DailyMeals(QWidget):
         self.setLayout(self.mainLayout)
 
     def buttonsIni(self):
-        buttonsFont = QFont()
-        buttonsFont.setItalic(True)
-        
         for meal in self.userDailyMeals:
             mealButton = QPushButton(meal)
-            mealButton.setFont(buttonsFont)
             mealButton.setAutoDefault(False)
 
             sizePolicy = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
