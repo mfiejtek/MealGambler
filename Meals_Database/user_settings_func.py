@@ -18,6 +18,6 @@ def load_settings():
         return {}
 
 def save_settings(settings):
-    with open(SETTINGS_PATH, "r") as file:
+    with open(SETTINGS_PATH, "w") as file:
         json.dump(settings, file, indent = 4)
 
