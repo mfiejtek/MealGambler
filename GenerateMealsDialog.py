@@ -15,8 +15,9 @@ class GenerateMealsDialog(QDialog, Ui_Dialog):
 
 
     def onSettingButtonClick(self):
-        self.settingsDialog = SettingsDialog(self)
-        self.settingsDialog.exec()
+        self.settingsDialog = SettingsDialog()
+        if self.settingsDialog.exec() == QDialog.DialogCode.Accepted:
+            self.mealsViewWidget.refreshView()
     
     def onClearButtonClick(self):
         self.mealsViewWidget.clearMeals()

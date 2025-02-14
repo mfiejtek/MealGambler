@@ -68,8 +68,9 @@ class SettingsDialog(QDialog, Ui_Dialog):
         }
 
         self.done(QDialog.DialogCode.Accepted)
-        QMessageBox.information(self, "Success", "Settings saved.")
         save_settings(settings)
+        QMessageBox.information(self, "Success", "Settings saved.")
+        
         
 
         

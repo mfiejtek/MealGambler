@@ -2,15 +2,17 @@ from PyQt6.QtWidgets import  QWidget, QVBoxLayout, QPushButton, QHBoxLayout, QFr
 from PyQt6.QtGui import QFont
 from ChooseMealDialog import ChooseMealDialog
 from Meals_Database.meals_database_func import getMealsFromCategory
+from Meals_Database.user_settings_func import load_settings
 import random
 
 DEFAULT_DAILY_MEALS = ("Breakfast", "Dinner", "Supper", "Snack")
 DEFAULT_DAYS_NUMBER = 7
 
 class DailyMeals(QWidget):
-    def __init__(self, userDailyMeals, parent = None):
+    def __init__(self, userDailyMeals, userDays, parent = None):
         super().__init__(parent)
         self.userDailyMeals = userDailyMeals
+        self.userDays = userDays
 
         self.frame = QFrame(self)
         self.frame.setFrameShape(QFrame.Shape.Box)
@@ -59,17 +61,27 @@ class DailyMeals(QWidget):
 
      
 class MealsView(QWidget):
-    def __init__(self, userDaysNumber = DEFAULT_DAYS_NUMBER, userDailyMeals = DEFAULT_DAILY_MEALS, parent = None):
+    def __init__(self,parent = None):
         super().__init__()
 
         self.mealsViewLayout = QHBoxLayout()
-        self.userDaysNumber = userDaysNumber
-        self.userDailyMeals = userDailyMeals
-        
-        for _ in range(self.userDaysNumber):
-            self.mealsViewLayout.addWidget(DailyMeals(self.userDailyMeals))
-        
+        self.refreshView()
         self.setLayout(self.mealsViewLayout)
+
+    def clearView(self):
+        while self.mealsViewLayout.count():
+            item = self.mealsViewLayout.takeAt(0)
+            widget = item.widget()
+            widget.deleteLater()
+
+    def refreshView(self):
+        self.clearView()
+        settings = load_settings()
+        self.userDays = settings.get("days", [])
+        self.userDailyMeals = settings.get("meals", [])
+
+        for day in self.userDays:
+            self.mealsViewLayout.addWidget(DailyMeals(self.userDailyMeals, self.userDays))
 
     def clearMeals(self):
         for i in range(self.mealsViewLayout.count()):

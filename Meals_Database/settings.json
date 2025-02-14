@@ -7,10 +7,9 @@
         "Other"
     ],
     "days": [
+        "Monday",
         "Tuesday",
-        "Thursday",
         "Friday",
-        "Saturday",
         "Sunday"
     ]
 }
