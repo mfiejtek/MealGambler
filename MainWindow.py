@@ -1,4 +1,5 @@
-import sys
+import sys, os
+from PyQt6.QtGui import QIcon
 from PyQt6.QtWidgets import QApplication, QMainWindow
 from PyQt6.QtCore import QSize
 from Ui_Files.Ui_MainWindow import Ui_MainWindow
@@ -44,6 +45,7 @@ if __name__ == "__main__":
     initializeDatabase()
     create_settings_file()
     app = QApplication(sys.argv)
+    app.setWindowIcon(QIcon(os.path.join(os.path.dirname(__file__), "icons", "icon.ico")))
 
     mainWindow = MainWindow()
     mainWindow.show()
