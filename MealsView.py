@@ -1,7 +1,7 @@
 from PyQt6.QtWidgets import  QWidget, QVBoxLayout, QPushButton, QHBoxLayout, QFrame, QDialog, QSizePolicy, QLabel
 from ChooseMealDialog import ChooseMealDialog
 from PyQt6.QtCore import Qt
-from Meals_Database.meals_database_func import getMealsFromCategory
+from Meals_Database.meals_database_func import getMealsFromCategory, getMealWithName
 from Meals_Database.user_settings_func import load_settings
 import random
 
@@ -29,11 +29,14 @@ class DailyMeals(QWidget):
 
         self.dayLabel = QLabel(self.userDay)
         self.dayLabel.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        
+
+        self.kcalLabel = QLabel("kcal: 0")
+        self.kcalLabel.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.mainLayout = QVBoxLayout()
         self.mainLayout.addWidget(self.dayLabel)
         self.mainLayout.addWidget(self.frame)
+        self.mainLayout.addWidget(self.kcalLabel)
         self.mainLayout.setContentsMargins(0, 0, 0, 0)
         self.mainLayout.setSpacing(0)
 
@@ -50,6 +53,17 @@ class DailyMeals(QWidget):
             self.dailyMealsButtons.append(mealButton)
             mealButton.clicked.connect(lambda checked, currentMeal = meal, button = mealButton: self.onMealButtonClicked(currentMeal, button))
             self.dailyMealsLayout.addWidget(mealButton)
+
+    def setKcalLabel(self):
+        self.kcalLabel.setText(f"kcal: {str(self.getDailyKcal())}") 
+
+    def getDailyKcal(self):
+        dailyKcal = 0
+        for button in self.dailyMealsButtons:
+            meal = getMealWithName(button.text())
+            if meal:
+                dailyKcal += meal[0][3]
+        return dailyKcal
         
 
     def onMealButtonClicked(self, meal, button):
@@ -91,6 +105,7 @@ class MealsView(QWidget):
             for button in widget.dailyMealsButtons:
                 button.setText(self.userDailyMeals[buttonCounter])
                 buttonCounter+=1
+            widget.kcalLabel.setText("kcal: 0")
 
     def randomizeMeals(self):
         for i in range(self.mealsViewLayout.count()):
@@ -104,4 +119,5 @@ class MealsView(QWidget):
                 if meals:
                     randomMeal = random.choice(meals)
                     button.setText(randomMeal[1])
+            widget.setKcalLabel()
 

@@ -75,6 +75,16 @@ def getMealsFromCategory(mealCategory):
     conn.close()
     return meals
 
+def getMealWithName(mealName):
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT * FROM meals WHERE name = ?", (mealName,))
+    meal = cursor.fetchall()
+
+    conn.close()
+    return meal
+
 #Get all meals from database
 def getAllMeals():
     conn = sqlite3.connect(DB_PATH)
