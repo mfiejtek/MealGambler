@@ -23,4 +23,7 @@ class GenerateMealsDialog(QDialog, Ui_Dialog):
         self.mealsViewWidget.clearMeals()
     
     def onRandomButtonClick(self):
-        self.mealsViewWidget.randomizeMeals()
+        if self.settingsDialog.repetitionCheckBox.isChecked():
+            self.mealsViewWidget.randomizeMealsWithoutRepetition()
+        else:
+            self.mealsViewWidget.randomizeMeals()

@@ -15,6 +15,7 @@ class SettingsDialog(QDialog, Ui_Dialog):
         settings = load_settings()
         mealsSettings = settings.get("meals", [])
         daysSettings = settings.get("days", [])
+        repetitionSettings = settings.get("without_repetition", False)
 
         self.mondayCheckBox.setChecked(self.mondayCheckBox.text() in daysSettings)
         self.tuesdayCheckBox.setChecked(self.tuesdayCheckBox.text() in daysSettings)
@@ -30,8 +31,7 @@ class SettingsDialog(QDialog, Ui_Dialog):
         self.snackCheckBox.setChecked(self.snackCheckBox.text() in mealsSettings)
         self.otherCheckBox.setChecked(self.otherCheckBox.text() in mealsSettings)
 
-
-
+        self.repetitionCheckBox.setChecked(repetitionSettings)
 
     def onSaveButtonclick(self):
         selectedMeals = []
@@ -61,10 +61,13 @@ class SettingsDialog(QDialog, Ui_Dialog):
             selectedDays.append("Saturday")
         if self.sundayCheckBox.isChecked():
             selectedDays.append("Sunday")
+        
+        withoutRepetition = self.repetitionCheckBox.isChecked()
 
         settings = {
             "meals": selectedMeals,
-            "days": selectedDays
+            "days": selectedDays,
+            "without_repetition": withoutRepetition
         }
 
         self.done(QDialog.DialogCode.Accepted)

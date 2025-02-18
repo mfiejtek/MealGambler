@@ -120,4 +120,29 @@ class MealsView(QWidget):
                     randomMeal = random.choice(meals)
                     button.setText(randomMeal[1])
             widget.setKcalLabel()
+        
+    def randomizeMealsWithoutRepetition(self):
+        used_meals = set() 
+
+        for i in range(self.mealsViewLayout.count()):
+            layoutItem = self.mealsViewLayout.itemAt(i)
+            widget = layoutItem.widget()
+
+            for buttonIndex, button in enumerate(widget.dailyMealsButtons):
+                mealCategory = self.userDailyMeals[buttonIndex]
+                meals = getMealsFromCategory(mealCategory)
+
+                if meals:
+                    available_meals = [meal for meal in meals if meal[1] not in used_meals]
+
+                    if available_meals: 
+                        randomMeal = random.choice(available_meals)
+                        used_meals.add(randomMeal[1])
+                        button.setText(randomMeal[1])
+                    else:
+                        button.setText("Brak unikalnych posiłków")
+            
+            widget.setKcalLabel()
+
+
 
